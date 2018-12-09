@@ -28,7 +28,7 @@
 ```
 in html file:
 ```sh
-<form action="/profile" method="post" enctype="multipart/form-data">
+<form action="/actions/book" method="post" enctype="multipart/form-data">
   <input type="file" name="bookFile" />
 </form>
 ```
