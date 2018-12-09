@@ -4,16 +4,16 @@ const ErrorHandler = require('../helpers/errors.helper');
 /**
  * Adds new book to database
  * @api post
- * @param {JSON} req title - string, desc - string, author - string, print - ?string
+ * @param {JSON} req title - string, desc - string, author - string, bookFileName - string, print - ?string
  * @param {*} res 
  * @param {*} next 
  */
 const addBookToStore = async (req, res, next) => {
 
-    const { title, desc, author, print } = req.body;
+    const { title, desc, author, print, bookFileName } = req.body;
     let book;
 
-    book = print !== undefined ? new BookSchema({ title, desc, author, print }) : new BookSchema({ title, desc, author, print: null });
+    book = print !== undefined ? new BookSchema({ title, desc, author, bookFileName, print }) : new BookSchema({ title, desc, author, bookFileName, print: null });
 
     try {
         await book.save();
@@ -38,7 +38,6 @@ const addBookToStore = async (req, res, next) => {
 const getAllBooksData = async (req, res, next) => {
     try {
         const booksData = await BookSchema.find();
-        console.log(booksData) ;
         res.status(200).send({
             success: true,
             data: booksData
