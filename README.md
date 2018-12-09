@@ -1,7 +1,7 @@
 # Routes
 
 ### /actions/book
-* get 
+* get // returns all books 
 ```sh
 {
     "success": boolean,
@@ -17,7 +17,7 @@
     ]
 }
 ```
-* post + file (name need to be bookFile)
+* post + file (name need to be bookFile) // adds book
 ```sh
 {
 	"title": string,
@@ -32,4 +32,18 @@ in html file:
   <input type="file" name="bookFile" />
 </form>
 ```
-
+* delete // removes book
+```sh
+{
+    "id": string
+}
+```
+* patch // edits book
+```sh
+{
+    "id": string,
+    "data": {
+        // here things to change
+    }
+}
+```
