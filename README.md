@@ -81,5 +81,5 @@ in html file:
 }
 ```
 
-### /ebook/:id
+### /reading/ebook/:id
 * get // pdf file - stream
