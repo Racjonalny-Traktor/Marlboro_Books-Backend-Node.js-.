@@ -47,3 +47,26 @@ in html file:
     }
 }
 ```
+### /beacons/verify
+* post // checks is user in the bus
+```sh
+{
+    "tagName": string
+}
+```
+### /beacons/buses
+* get // all buses data
+```sh
+{
+    "success": boolean,
+    "data": [
+        {
+            "usersToday": number,
+            "readingUsersToday": number,
+            "_id": string,
+            "line": string,
+            "beaconsTagName": string
+        }
+    ]
+}
+```
