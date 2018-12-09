@@ -77,8 +77,6 @@ const removeBookFromStore = async (req, res, next) => {
 const editBookData = async (req, res, next) => {
     const bookId = req.body.id;
     const updateData = req.body.data;
-    console.log(bookId);
-    console.log(updateData);
     try {
         await BookSchema.findOneAndUpdate({ _id: bookId }, updateData);
         const data = await BookSchema.findOne({_id: bookId});
