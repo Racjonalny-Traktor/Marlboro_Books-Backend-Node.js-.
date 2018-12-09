@@ -80,3 +80,6 @@ in html file:
     ]
 }
 ```
+
+### /ebook/:id
+* get // pdf file - stream
