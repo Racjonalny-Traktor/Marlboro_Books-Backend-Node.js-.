@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const actionsRouter = require('./src/routes/actions.route');
+const beaconsRouter = require('./src/routes/beacons.route');
 
 const app = express();
 
@@ -23,5 +24,6 @@ mongoose.connect('mongodb://127.0.0.1:27017/books', {
 });
 
 app.use('/actions', actionsRouter);
+app.use('/beacons', beaconsRouter);
 
 module.exports = app;

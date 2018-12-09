@@ -9,22 +9,43 @@ const ErrorHandler = require('../helpers/errors.helper');
  * @param {*} next 
  */
 const verifyBeacon = async (req, res, next) => {
-    const beaconTagName = req.body.tagName;
+    const beaconsTagName = req.body.tagName;
     try {
-        const bus = await BeaconsSchema.findOne({ beaconTagName });
-        console.log(bus);
-        const { line } = bus;
+        const bus = await BeaconsSchema.findOne({ beaconsTagName });
+        const { line, _id } = bus;
 
         res.status(200).send({
             success: true,
             busLine: line,
+            id: _id,
             msg: 'You are approved for reading'
         });
-        console.log('[SUCCESS] Beacons: Successfuly verified you in the bus');
     } catch (error) {
         console.error('[ERROR] Beacons: Error occured while verifing beacon');
         ErrorHandler.throwError(res, error);
     }
+    console.log('[SUCCESS] Beacons: Successfuly verified you in the bus');
 }
 
-module.exports = { verifyBeacon };
+/**
+ * Returns data of all buses
+ * @api get
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
+const getBusesData = async (req, res, next) => {
+    try {
+        const buses = await BeaconsSchema.find({});
+        console.log(buses);
+        res.status(200).send({
+            success: true,
+            data: buses
+        });
+    } catch (error) {
+        console.error('[ERROR] Beacons: Error occured while getting data about buses');
+        ErrorHandler.throwError(res, error);
+    }
+}
+
+module.exports = { verifyBeacon, getBusesData };
