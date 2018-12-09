@@ -2,11 +2,9 @@ const BookSchema = require('../models/book.model');
 const ErrorHandler = require('../helpers/errors.helper');
 
 /**
- * title-string
- * desc-string
- * author-string
- * print-?string
- * @param {*} req 
+ * Adds new book to database
+ * @api post
+ * @param {JSON} req title - string, desc - string, author - string, print - ?string
  * @param {*} res 
  * @param {*} next 
  */
@@ -30,6 +28,13 @@ const addBookToStore = async (req, res, next) => {
     console.log('[SUCCESS] Actions: Added book to store');
 }
 
+/**
+ * Gets all books from database
+ * @api get
+ * @param {*} req 
+ * @param {*} res 
+ * @param {*} next 
+ */
 const getAllBooksData = async (req, res, next) => {
     try {
         const booksData = await BookSchema.find();
@@ -46,8 +51,9 @@ const getAllBooksData = async (req, res, next) => {
 }
 
 /**
- * id-string
- * @param {*} req 
+ * Removes book from database
+ * @api delete
+ * @param {JSON} req id - string
  * @param {*} res 
  * @param {*} next 
  */
@@ -68,9 +74,9 @@ const removeBookFromStore = async (req, res, next) => {
 }
 
 /**
- * id-string
- * data-object
- * @param {*} req 
+ * Updates book data in database
+ * @api patch
+ * @param {JSON} req id - string, data - object
  * @param {*} res 
  * @param {*} next 
  */
