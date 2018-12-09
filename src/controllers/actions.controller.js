@@ -86,14 +86,15 @@ const removeBookFromStore = async (req, res, next) => {
  */
 const editBookData = async (req, res, next) => {
     const bookId = req.body.id;
-    const updateData = req.body.data;
+    const updateData = req.body.data.data;
     try {
-        await BookSchema.findOneAndUpdate({ _id: bookId }, updateData);
-        const data = await BookSchema.findOne({_id: bookId});
+        console.log(req.body.data.data);
+        const updatedBook = await BookSchema.findOneAndUpdate(bookId, { $set: updateData }).exec();
+        console.log(updatedBook);
         res.status(200).send({
             success: true,
             msg: 'Successfuly updated book in store',
-            update: data
+            update: updatedBook
         });
     } catch (error) {
         console.error('[ERROR] Actions: Error occured while editing book in store')
