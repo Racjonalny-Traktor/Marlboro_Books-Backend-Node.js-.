@@ -10,10 +10,15 @@ const ErrorHandler = require('../helpers/errors.helper');
  */
 const addBookToStore = async (req, res, next) => {
 
-    const { title, desc, author, print, bookFileName } = req.body;
+    const { title, desc, author, print } = req.body;
     let book;
+    if (print !== undefined) {
+        book = new BookSchema({ title, desc, author, file: req.file, print });
+    } else {
+        book = new BookSchema({ title, desc, author, file: req.file, print: null });
+    }
+    console.log(book);
 
-    book = print !== undefined ? new BookSchema({ title, desc, author, bookFileName, print }) : new BookSchema({ title, desc, author, bookFileName, print: null });
 
     try {
         await book.save();
