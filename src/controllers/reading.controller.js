@@ -1,3 +1,4 @@
+const fs = require('fs');
 const BookSchema = require('../models/book.model');
 const ErrorHandler = require('../helpers/errors.helper');
 
@@ -14,13 +15,12 @@ const getEbookById = async (req, res, next) => {
             return;
         }
         console.log(book);
-        res.setHeader('Content-Type', book.file.mimetype);
-        const file = fs.createReadStream(book.file.destination);
-        await file.pipe(res);
+        const data = fs.readFileSync(book.file.destination + book.file.filename, 'utf8');
+        
 
         res.status(200).send({
             success: true,
-            msg: 'Successfuly downloaded ebook'
+            data: data.toString()
         });
 
     } catch (error) {
